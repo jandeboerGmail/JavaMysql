@@ -1,6 +1,8 @@
 
 package com.company;
-import java.sql.*;
+import org.json.simple.JSONObject;
+
+
 
 /**
  * A Java MySQL SELECT statement example.
@@ -9,7 +11,7 @@ import java.sql.*;
  *
  * Created by Alvin Alexander, http://alvinalexander.com
  */
-public class JavaMysqlSelectExample {
+public class JavaMysqlExample {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://192.168.1.10/feedback";
@@ -39,13 +41,64 @@ public class JavaMysqlSelectExample {
         }
     }
 
+    private static void writeMetaData(ResultSet resultSet) throws SQLException {
+        //  Now get some metadata from the database
+        // Result set get the result of the SQL query
+
+        System.out.println("The columns in the table are: ");
+
+        System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
+        for  (int i = 1; i<= resultSet.getMetaData().getColumnCount(); i++){
+            System.out.println("Column " +i  + " "+ resultSet.getMetaData().getColumnName(i));
+        }
+    }
+
+    private static void TestJSON() {
+        JSONParser parser = new JSONParser();
+        String s = "[0,{\"1\":{\"2\":{\"3\":{\"4\":[5,{\"6\":7}]}}}}]";
+
+        try{
+            Object obj = parser.parse(s);
+            JSONArray array = (JSONArray)obj;
+
+            System.out.println("The 2nd element of array");
+            System.out.println(array.get(1));
+            System.out.println();
+
+            JSONObject obj2 = (JSONObject)array.get(1);
+            System.out.println("Field \"1\"");
+            System.out.println(obj2.get("1"));
+
+            s = "{}";
+            obj = parser.parse(s);
+            System.out.println(obj);
+
+            s = "[5,]";
+            obj = parser.parse(s);
+            System.out.println(obj);
+
+            s = "[5,,2]";
+            obj = parser.parse(s);
+            System.out.println(obj);
+        }catch(ParseException pe){
+
+            System.out.println("position: " + pe.getPosition());
+            System.out.println(pe);
+        }
+    }
+
+
+
     public static void main(String[] args) {
+
+
         Connection conn = null;
-        Statement stmt = null;
-        Connection connect = null;
-        Statement statement = null;
+        // Statement stmt = null;
+        // Connection connect = null;
+        // Statement statement = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        // ResultSet resultSet = null;
+
         try {
             //STEP 2: Register JDBC driver
             Class.forName(JDBC_DRIVER);
@@ -79,18 +132,42 @@ public class JavaMysqlSelectExample {
             }
             st.close();
 
+            System.out.println("Insert a  User...");
+            // PreparedStatements can use variables and are more efficient
+            preparedStatement = conn.prepareStatement("insert into  feedback.comments values (default, ?, ?, ?, ? , ?, ?)");
+            // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
+            // Parameters start with 1
+            preparedStatement.setString(1, "Test1");
+            preparedStatement.setString(2, "TestEmail1");
+            preparedStatement.setString(3, "TestWebpage1");
+            preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
+            preparedStatement.setString(5, "TestSummary1");
+            preparedStatement.setString(6, "TestComment1");
+            preparedStatement.executeUpdate();
+
+            System.out.println("Report new User...");
+            preparedStatement = conn.prepareStatement("SELECT myuser, webpage, datum, summary, COMMENTS from feedback.comments");
+            rs = preparedStatement.executeQuery();
+            writeResultSet(rs);
+
             // Statements allow to issue SQL queries to the database
             st = conn.createStatement();
             // Result set get the result of the SQL query
             System.out.println("Select from comments...");
-            resultSet = st.executeQuery("select * from feedback.comments");
-            writeResultSet(resultSet);
+            rs = st.executeQuery("select * from feedback.comments");
+            writeResultSet(rs);
+            System.out.println("Metadata from Select from comments...");
+            writeMetaData(rs);
+
+            TestJSON();
+
 
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
-        }
-    }
 
+        }
+
+    }
 
 }

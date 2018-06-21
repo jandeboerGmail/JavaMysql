@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="json-20180130">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/classes/json-20180130.jar!/" />
+      <root url="jar://$USER_HOME$/classes/json-lib-2.4-jdk15.jar!/" />
+      <root url="jar://$USER_HOME$/classes/mysql-connector-java-8.0.11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
