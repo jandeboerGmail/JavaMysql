@@ -135,18 +135,22 @@ public class JavaMysqlExample {
             }
             st.close();
 
-            System.out.println("Insert a  User...");
+            System.out.println("Insert some Users...");
             // PreparedStatements can use variables and are more efficient
             preparedStatement = conn.prepareStatement("insert into  feedback.comments values (default, ?, ?, ?, ? , ?, ?)");
             // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
             // Parameters start with 1
-            preparedStatement.setString(1, "Test1");
-            preparedStatement.setString(2, "TestEmail1");
-            preparedStatement.setString(3, "TestWebpage1");
-            preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
-            preparedStatement.setString(5, "TestSummary1");
-            preparedStatement.setString(6, "TestComment1");
-            preparedStatement.executeUpdate();
+
+            for (int i = 0; i < 10; i++) {
+                // System.out.println(i);
+                preparedStatement.setString(1, "Test1");
+                preparedStatement.setString(2, "TestEmail1");
+                preparedStatement.setString(3, "TestWebpage1");
+                preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
+                preparedStatement.setString(5, "TestSummary1");
+                preparedStatement.setString(6, "TestComment1");
+                preparedStatement.executeUpdate();
+            }
 
             System.out.println("Report new User...");
             preparedStatement = conn.prepareStatement("SELECT myuser, webpage, datum, summary, COMMENTS from feedback.comments");
