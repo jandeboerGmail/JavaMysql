@@ -10,5 +10,15 @@
     <orderEntry type="library" name="mysql-connector-java-8.0.11" level="application" />
     <orderEntry type="library" name="json-lib-2.4-jdk15" level="application" />
     <orderEntry type="library" name="json-20180130" level="project" />
+    <orderEntry type="library" name="json-simple-1.1.1" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/lib/groovy-all-2.4.12.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

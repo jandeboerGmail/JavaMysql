@@ -1,7 +1,9 @@
 
 package com.company;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
-//import org.json.simple.JSONObject;
+import org.json.simple.*;
 
 
 
@@ -12,7 +14,7 @@ import java.sql.*;
  *
  * Created by Alvin Alexander, http://alvinalexander.com
  */
-public class JavaMysqlExample {
+public class  JavaMysqlExample {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://192.168.1.10/feedback";
@@ -54,49 +56,40 @@ public class JavaMysqlExample {
         }
     }
 
-    /*
 
     private static void TestJSON() {
-        JSONParser parser = new JSONParser();
-        String s = "[0,{\"1\":{\"2\":{\"3\":{\"4\":[5,{\"6\":7}]}}}}]";
 
-        try{
-            Object obj = parser.parse(s);
-            JSONArray array = (JSONArray)obj;
+        JSONObject obj = new JSONObject();
 
-            System.out.println("The 2nd element of array");
-            System.out.println(array.get(1));
-            System.out.println();
+        obj.put("name", "mkyong.com");
+        obj.put("age", new Integer(100));
 
-            JSONObject obj2 = (JSONObject)array.get(1);
-            System.out.println("Field \"1\"");
-            System.out.println(obj2.get("1"));
+        JSONArray list = new JSONArray();
+        list.add("msg 1");
+        list.add("msg 2");
+        list.add("msg 3");
 
-            s = "{}";
-            obj = parser.parse(s);
-            System.out.println(obj);
+        obj.put("messages", list);
 
-            s = "[5,]";
-            obj = parser.parse(s);
-            System.out.println(obj);
+        try (FileWriter file = new FileWriter("ftest.json")) {
 
-            s = "[5,,2]";
-            obj = parser.parse(s);
-            System.out.println(obj);
-        }catch(ParseException pe){
+            file.write(obj.toJSONString());
+            file.flush();
 
-            System.out.println("position: " + pe.getPosition());
-            System.out.println(pe);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        System.out.print(obj);
     }
 
-*/
 
     public static void main(String[] args) {
 
 
         Connection conn = null;
         PreparedStatement preparedStatement = null;
+
         // ResultSet resultSet = null;
 
         try {
@@ -163,7 +156,7 @@ public class JavaMysqlExample {
             System.out.println("Metadata from Select from comments...");
             writeMetaData(rs);
 
-            //TestJSON();
+            TestJSON();
 
 
         } catch (Exception e) {
