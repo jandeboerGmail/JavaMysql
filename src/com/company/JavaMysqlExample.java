@@ -96,9 +96,6 @@ public class JavaMysqlExample {
 
 
         Connection conn = null;
-        // Statement stmt = null;
-        // Connection connect = null;
-        // Statement statement = null;
         PreparedStatement preparedStatement = null;
         // ResultSet resultSet = null;
 
