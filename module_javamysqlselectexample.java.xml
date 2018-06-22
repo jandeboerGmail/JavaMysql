@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_javamysqlselectexample.java" default="compile.module.javamysqlselectexample.java">
+  <dirname property="module.javamysqlselectexample.java.basedir" file="${ant.file.module_javamysqlselectexample.java}"/>
+  
+  <property name="module.jdk.home.javamysqlselectexample.java" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.javamysqlselectexample.java" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.javamysqlselectexample.java" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.javamysqlselectexample.java" value="-encoding UTF-8 -source 10 -target 10 ${compiler.args}"/>
+  
+  <property name="javamysqlselectexample.java.output.dir" value="${module.javamysqlselectexample.java.basedir}/out/production/JavaMysqlSelectExample.java"/>
+  <property name="javamysqlselectexample.java.testoutput.dir" value="${module.javamysqlselectexample.java.basedir}/out/test/JavaMysqlSelectExample.java"/>
+  
+  <path id="javamysqlselectexample.java.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="javamysqlselectexample.java.module.production.classpath">
+    <path refid="${module.jdk.classpath.javamysqlselectexample.java}"/>
+    <path refid="library.mysql-connector-java-8.0.11.classpath"/>
+    <path refid="library.json-20180130.classpath"/>
+  </path>
+  
+  <path id="javamysqlselectexample.java.runtime.production.module.classpath">
+    <pathelement location="${javamysqlselectexample.java.output.dir}"/>
+    <path refid="library.mysql-connector-java-8.0.11.classpath"/>
+    <path refid="library.json-20180130.classpath"/>
+  </path>
+  
+  <path id="javamysqlselectexample.java.module.classpath">
+    <path refid="${module.jdk.classpath.javamysqlselectexample.java}"/>
+    <pathelement location="${javamysqlselectexample.java.output.dir}"/>
+    <path refid="library.mysql-connector-java-8.0.11.classpath"/>
+    <path refid="library.json-20180130.classpath"/>
+  </path>
+  
+  <path id="javamysqlselectexample.java.runtime.module.classpath">
+    <pathelement location="${javamysqlselectexample.java.testoutput.dir}"/>
+    <pathelement location="${javamysqlselectexample.java.output.dir}"/>
+    <path refid="library.mysql-connector-java-8.0.11.classpath"/>
+    <path refid="library.json-20180130.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.javamysqlselectexample.java">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.javamysqlselectexample.java">
+    <patternset refid="excluded.from.module.javamysqlselectexample.java"/>
+  </patternset>
+  
+  <path id="javamysqlselectexample.java.module.sourcepath">
+    <dirset dir="${module.javamysqlselectexample.java.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.javamysqlselectexample.java" depends="compile.module.javamysqlselectexample.java.production,compile.module.javamysqlselectexample.java.tests" description="Compile module JavaMysqlSelectExample.java"/>
+  
+  <target name="compile.module.javamysqlselectexample.java.production" depends="register.custom.compilers" description="Compile module JavaMysqlSelectExample.java; production classes">
+    <mkdir dir="${javamysqlselectexample.java.output.dir}"/>
+    <javac2 destdir="${javamysqlselectexample.java.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.javamysqlselectexample.java}/javac">
+      <compilerarg line="${compiler.args.javamysqlselectexample.java}"/>
+      <bootclasspath refid="javamysqlselectexample.java.module.bootclasspath"/>
+      <classpath refid="javamysqlselectexample.java.module.production.classpath"/>
+      <src refid="javamysqlselectexample.java.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.javamysqlselectexample.java"/>
+    </javac2>
+    
+    <copy todir="${javamysqlselectexample.java.output.dir}">
+      <fileset dir="${module.javamysqlselectexample.java.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.javamysqlselectexample.java.tests" depends="register.custom.compilers,compile.module.javamysqlselectexample.java.production" description="compile module JavaMysqlSelectExample.java; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.javamysqlselectexample.java" description="cleanup module">
+    <delete dir="${javamysqlselectexample.java.output.dir}"/>
+    <delete dir="${javamysqlselectexample.java.testoutput.dir}"/>
+  </target>
+</project>
