@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JavaMysqlSelectExample.java.iml" filepath="$PROJECT_DIR$/JavaMysqlSelectExample.java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaMysql.iml" filepath="$PROJECT_DIR$/JavaMysql.iml" />
     </modules>
   </component>
 </project>

@@ -1,9 +1,7 @@
 
 package com.company;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
-import org.json.simple.*;
+//import org.json.simple.*;
 
 
 
@@ -16,13 +14,15 @@ import org.json.simple.*;
  */
 public class  JavaMysqlExample {
     // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://192.168.1.10/feedback";
+    //static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    //static final String DB_URL = "jdbc:mysql://192.168.1.10/feedback";
+    static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+    static final String DB_URL = "jdbc:mariadb://192.168.1.10/feedback";
 
     //  Database credentials
 
-    static final String USER = "sqluser";
-    static final String PASS = "sqluserpw";
+    static final String USER = "root";
+    static final String PASS = "daf1234";
 
     private static void writeResultSet(ResultSet resultSet) throws SQLException {
         // ResultSet is initially before the first data set
@@ -57,6 +57,7 @@ public class  JavaMysqlExample {
     }
 
 
+    /*<editor-fold desc="Description">
     private static void TestJSON() {
 
         JSONObject obj = new JSONObject();
@@ -82,6 +83,7 @@ public class  JavaMysqlExample {
 
         System.out.print(obj);
     }
+    */
 
 
     public static void main(String[] args) {
@@ -156,7 +158,7 @@ public class  JavaMysqlExample {
             System.out.println("Metadata from Select from comments...");
             writeMetaData(rs);
 
-            TestJSON();
+            // TestJSON();
 
 
         } catch (Exception e) {
