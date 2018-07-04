@@ -1,7 +1,12 @@
 
 package com.company;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
-//import org.json.simple.*;
 
 
 
@@ -57,7 +62,6 @@ public class  JavaMysqlExample {
     }
 
 
-    /*<editor-fold desc="Description">
     private static void TestJSON() {
 
         JSONObject obj = new JSONObject();
@@ -83,8 +87,6 @@ public class  JavaMysqlExample {
 
         System.out.print(obj);
     }
-    */
-
 
     public static void main(String[] args) {
 
@@ -158,7 +160,7 @@ public class  JavaMysqlExample {
             System.out.println("Metadata from Select from comments...");
             writeMetaData(rs);
 
-            // TestJSON();
+            TestJSON();
 
 
         } catch (Exception e) {
